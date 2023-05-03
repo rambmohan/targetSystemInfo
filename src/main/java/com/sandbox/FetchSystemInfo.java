@@ -17,7 +17,7 @@ public class FetchSystemInfo {
 
     public static Queue<Integer> queue = new LinkedList<>();
 
-    int max = 16;
+    int max = 100;
     int min = 1;
     int range = max - min + 1;
 
@@ -31,11 +31,12 @@ public class FetchSystemInfo {
         System.out.println("version="+bean.getVersion());
         System.out.println("System load Avg="+bean.getSystemLoadAverage());
 
-        OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
-        System.out.println((osBean.getSystemCpuLoad() * 100) + "%");
+        //OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
+        //System.out.println((osBean.getSystemCpuLoad() * 100) + "%");
 
-        int rand = (int)(Math.random() * range) + min;
-        queue.add(rand);
+        //int rand = (int)(Math.random() * range) + min;
+        Double cpuAvg = bean.getSystemLoadAverage()*100;
+        queue.add(cpuAvg.intValue());
         System.out.println(queue);
     }
 }
