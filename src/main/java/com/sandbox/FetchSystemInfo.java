@@ -25,18 +25,21 @@ public class FetchSystemInfo {
     public void fetchSystemInfo(){
         System.out.println("##### fetchSystemInfo #######");
         OperatingSystemMXBean bean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-        System.out.println("Name="+bean.getName());
-        System.out.println("Process="+bean.getAvailableProcessors());
-        System.out.println("arch="+bean.getArch());
-        System.out.println("version="+bean.getVersion());
+        //System.out.println("Name="+bean.getName());
+        //System.out.println("Process="+bean.getAvailableProcessors());
+        //System.out.println("arch="+bean.getArch());
+        //System.out.println("version="+bean.getVersion());
         System.out.println("System load Avg="+bean.getSystemLoadAverage());
 
         //OperatingSystemMXBean osBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         //System.out.println((osBean.getSystemCpuLoad() * 100) + "%");
 
         //int rand = (int)(Math.random() * range) + min;
-        Double cpuAvg = bean.getSystemLoadAverage()*100;
-        queue.add(cpuAvg.intValue());
+        Double cpuAvg = (bean.getSystemLoadAverage()*100);
+        System.out.println("cpuAvg="+cpuAvg.intValue());
+        if(queue.size()<=15) {
+            queue.add(cpuAvg.intValue());
+        }
         System.out.println(queue);
     }
 }
